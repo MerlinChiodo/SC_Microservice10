@@ -33,6 +33,4 @@ const schema = {
     ]
 }
 
-//const schemaAsObject = JSON.parse(schema)
-
 module.exports = schema

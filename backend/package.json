@@ -8,7 +8,7 @@
     "devstart": "nodemon server.js",
     "start": "concurrently npm:run-*",
     "run-webserver": "node server.js",
-    "run-eventlistener": "node eventlistener.js"
+    "run-eventlistener": "node eventlistener/eventlistener.js"
   },
   "author": "Janik Geist, Adrian Koss",
   "license": "ISC",
