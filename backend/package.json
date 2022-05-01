@@ -13,8 +13,10 @@
   "author": "Janik Geist, Adrian Koss",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^3.13.0",
     "amqplib": "^0.8.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "prisma": "^3.13.0"
   },
   "devDependencies": {
     "chai": "^4.3.6",
