@@ -1,0 +1,3 @@
+
+Services
+GET api/service --> 200/404/500 ([Services])

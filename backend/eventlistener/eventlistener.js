@@ -2,7 +2,8 @@
 const amqp = require('amqplib/callback_api')
 const schema = require('./eventSchema')
 const Ajv = require('ajv')
-const {PrismaClient} = require("@prisma/client");
+/*const {PrismaClient} = require("@prisma/client");*/
+const prisma = require("../prismaClient")
 const moment = require('moment')
 
 /* AJV-setup to check JSON-Schema */
@@ -13,11 +14,11 @@ const validate = ajv.compile(schema)
 const rabbitMQUsername = process.env.rabbitUser
 const rabbitMQPassword = process.env.rabbitPass
 const serverURL = process.env.server
-
-/* PrismaClient for database queries */
+/*
+/!* PrismaClient for database queries *!/
 const prisma = new PrismaClient({
     log: ['query','info','warn','error'],
-})
+})*/
 
 /* Constant used to limit the lenght of the aboutUs */
 const MAX_LENGTH = 255;
@@ -37,7 +38,13 @@ amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`,
             //consume incoming event
             console.log(msg.content.toString())
 
-            let eventJSON = JSON.parse(msg.content.toString())
+            let eventJSON
+            try {
+                eventJSON = JSON.parse(msg.content.toString())
+            }catch (e){
+                console.log(e)
+                return;
+            }
 
             //check if event is valid
             if(validate(eventJSON)){
