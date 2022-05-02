@@ -19,6 +19,9 @@ const prisma = new PrismaClient({
     log: ['query','info','warn','error'],
 })
 
+/* Constant used to limit the lenght of the aboutUs */
+const MAX_LENGTH = 255;
+
 amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`, function (error0, connection) {
     if (error0) {
         throw error0
@@ -62,15 +65,19 @@ amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`,
                     try {
                         if(eventJSON.about_us){
                             //about us was given --> update
-                            await prisma.service.update({
-                                where: {
-                                    service_name: eventJSON.service_name
-                                },
-                                data: {
-                                    about_us: eventJSON.about_us,
-                                    last_edited: date,
-                                }
-                            })
+
+                            //check if about us is not too long
+                            if(eventJSON.about_us.length <= MAX_LENGTH) {
+                                await prisma.service.update({
+                                    where: {
+                                        service_name: eventJSON.service_name
+                                    },
+                                    data: {
+                                        about_us: eventJSON.about_us,
+                                        last_edited: date,
+                                    }
+                                })
+                            }
                         }
                         if(eventJSON.picture){
                             //picture was given --> update
