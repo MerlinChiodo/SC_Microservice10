@@ -8,22 +8,92 @@
     </div>
   </header>
   <div>
-    <ul class="container space-around">
-      <service-component />
-      <service-component />
-      <service-component />
-      <service-component />
-      <service-component />
-    </ul>
-    <ul class="container space-around">
-      <service-component />
-      <service-component />
-      <service-component />
-      <service-component />
-      <service-component />
+    <ul class="container space-around"
+        v-for="index in getColNumber()"
+        :key="index"
+    >
+      <service-component
+        v-for="service in getRowNumbers(index)"
+        :key="(index - 1) * getColWidth() + (service - 1)"
+        :service="services[(service - 1) + getColWidth() * (index - 1)]"
+      />
     </ul>
   </div>
 </template>
+
+<script>
+import ServiceComponent from '@/components/service'
+
+export default {
+  components: { ServiceComponent },
+  data () {
+    return {
+      services: [],
+      windowWidth: window.innerWidth
+    }
+  },
+  methods: {
+    getColNumber () {
+      const colWidth = this.getColWidth()
+      const num = (this.services.length / colWidth) + 1
+      return parseInt(num.toString())
+    },
+    getRowNumbers (colNumber) {
+      const colWidth = this.getColWidth()
+      const serviceAmount = this.services.length
+      const doneServices = (colNumber - 1) * colWidth
+      const rest = serviceAmount - doneServices
+      return (rest > colWidth ? colWidth : rest)
+    },
+    getColWidth () {
+      return Math.floor(this.windowWidth / 300)
+    }
+  },
+  async mounted () {
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth
+    }
+    this.services = [
+      {
+        service_name: 'Bürgerbüro',
+        about_us: 'Was ein tolles Ding'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Kita',
+        about_us: 'Hier finden Kinder immer was'
+      },
+      {
+        service_name: 'Bürgerbüro',
+        about_us: 'Was ein tolles Ding'
+      }
+    ]
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -72,10 +142,3 @@ body {
 }
 
 </style>
-<script>
-import ServiceComponent from '@/components/service'
-
-export default {
-  components: { ServiceComponent }
-}
-</script>
