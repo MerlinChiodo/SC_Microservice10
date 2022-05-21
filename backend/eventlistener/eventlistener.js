@@ -67,7 +67,7 @@ amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`,
 
                     if(service) {
                         //service already exists, delete it
-                        const deleteService = prisma.service.delete({
+                        const deleteService = await prisma.service.delete({
                             where:{
                                 service_name: eventJSON.service_name,
                             },

@@ -62,6 +62,27 @@ const deleteSchema = {
     ]
 }
 
+/**
+ *  Example queries in RabbitMQ
+ *  {
+ *         "event_id" : 1002,
+ *         "event_name": "Delete My Service",
+ *         "service_name": "Test",
+ *         "date": "1999-06-10T11:11-11",
+ *         "about_us": "Dies ist ein erneuter Test",
+ *         "picture": "Irgendwo wo man ein Bild hochladen kann"
+ * }
+ *
+ * {
+ *         "event_id" : 1002,
+ *         "event_name": "Updated About US",
+ *         "service_name": "Test",
+ *         "date": "1999-06-10T11:11-11",
+ *         "about_us": "Dies ist ein erneuter Test",
+ *         "picture": "Irgendwo wo man ein Bild hochladen kann"
+ * }
+ * */
+
 module.exports = {
     updateSchema,
     deleteSchema
