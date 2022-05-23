@@ -26,8 +26,13 @@ WORKDIR /app/backend
 
 # Copy the backend package and package-lock.json file
 COPY backend/package*.json ./
+COPY backend/prisma/schema.prisma ./prisma/
 
 # Install node packages
+RUN npm install
+
+RUN npx prisma generate
+
 RUN npm install
 
 # Copy or project directory (locally) in the current directory of our docker image (/app)
