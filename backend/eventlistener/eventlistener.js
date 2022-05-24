@@ -15,7 +15,7 @@ const rabbitMQUsername = process.env.rabbitUser
 const rabbitMQPassword = process.env.rabbitPass
 const serverURL = process.env.server
 
-/* Constant used to limit the lenght of the aboutUs */
+/* Constant used to limit the length of the aboutUs */
 const MAX_LENGTH = 255;
 
 amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`, function (error0, connection) {
@@ -122,28 +122,52 @@ amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`,
                             console.log(e)
                         }
                     }else{
-                        //service doesnt exist, create new one
-                        if(eventJSON.about_us && eventJSON.picture) {
-                            //only try to create when all required info is given
-                            try {
-                                const createService = await prisma.service.create({
+                        //only create a new Service if the url is given
+                        if(eventJSON.url){
+                            try{
+                                const service = await prisma.service.create({
                                     data: {
                                         service_name: eventJSON.service_name,
-                                        about_us: eventJSON.about_us,
-                                        picture: eventJSON.picture,
+                                        url: eventJSON.url,
                                         last_edited: date,
                                     }
                                 })
-                            } catch (e) {
-                                //something failed while creating the service
-                                console.log(e)
+
+                                if(eventJSON.about_us){
+                                    //about us was given, add
+                                    await prisma.service.update({
+                                        where: {
+                                            service_name: eventJSON.service_name
+                                        },
+                                        data: {
+                                            about_us: eventJSON.about_us,
+                                        }
+                                    })
+                                }
+
+
+                                if(eventJSON.picture){
+                                    //about us was given, add
+                                    await prisma.service.update({
+                                        where: {
+                                            service_name: eventJSON.service_name
+                                        },
+                                        data: {
+                                            picture: eventJSON.picture,
+                                        }
+                                    })
+                                }
+                            }catch (e) {
+                                console.log(e);
                             }
+                        }else{
+                            console.log('Service ${eventJSON.service_name} did not include URL');
                         }
                     }
                 }
             }else{
                 //event is invalid
-                console.log(updateValidate.errors + deleteValidate.errors)
+                console.log("Error while validating Schema: \n" + updateValidate.errors + deleteValidate.errors)
             }
         }, {
             noAck: true,
