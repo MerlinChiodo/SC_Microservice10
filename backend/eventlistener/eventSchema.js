@@ -23,6 +23,9 @@ const updateSchema = {
         },
         "picture": {
             "type": "string"
+        },
+        "url": {
+            "type": "string"
         }
     },
     "required": [
@@ -71,6 +74,7 @@ const deleteSchema = {
  *         "date": "1999-06-10T11:11-11",
  *         "about_us": "Dies ist ein erneuter Test",
  *         "picture": "Irgendwo wo man ein Bild hochladen kann"
+ *         "url": "geiler Link zu unserer Website!"
  * }
  *
  * {
@@ -80,6 +84,7 @@ const deleteSchema = {
  *         "date": "1999-06-10T11:11-11",
  *         "about_us": "Dies ist ein erneuter Test",
  *         "picture": "Irgendwo wo man ein Bild hochladen kann"
+ *         "url": "geiler Link zu unserer Website!"
  * }
  * */
 

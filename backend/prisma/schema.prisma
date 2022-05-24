@@ -13,6 +13,7 @@ datasource db {
 model Service {
     service_name    String @id
     last_edited     DateTime
-    about_us        String
-    picture         String
+    about_us        String?
+    picture         String?
+    url             String
 }
