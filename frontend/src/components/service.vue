@@ -1,11 +1,13 @@
 <template>
-  <div class="flex-item">
-    <h2 class="title">{{getServiceName(service)}}</h2>
-    <p class="description">
-      {{getServiceDescription(service)}}
-    </p>
-  </div>
-
+  <a :href="service.url">
+    <div class="flex-item">
+      <h2 class="title">{{getServiceName(service)}}</h2>
+      <p class="description">
+        {{getServiceDescription(service)}}
+      </p>
+      <img :src="service.picture" alt="">
+    </div>
+  </a>
 </template>
 
 <script>
@@ -54,6 +56,15 @@ export default {
   /*background-color: #05ff97;*/
   margin: 0 10px 20px 0;
   overflow: hidden;
+}
+
+a {
+  color:black;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
 }
 
 </style>

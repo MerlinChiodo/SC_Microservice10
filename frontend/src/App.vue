@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container space-between">
-      <h1>Landingpage</h1>
+      <h1>SmartCity</h1>
       <div class="login">
         <button>Zum Login</button>
       </div>
@@ -53,44 +53,13 @@ export default {
     window.onresize = () => {
       this.windowWidth = window.innerWidth
     }
-    this.services = [
-      {
-        service_name: 'Bürgerbüro',
-        about_us: 'Was ein tolles Ding'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Kita',
-        about_us: 'Hier finden Kinder immer was'
-      },
-      {
-        service_name: 'Bürgerbüro',
-        about_us: 'Was ein tolles Ding'
-      }
-    ]
+    fetch('/api/service')
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.services = data.msg
+      })
   }
 }
 </script>
