@@ -5,7 +5,7 @@
       <p class="description">
         {{getServiceDescription(service)}}
       </p>
-      <img :src="service.picture" alt="">
+      <img :src="getPictureURL(service)" alt="">
     </div>
   </a>
 </template>
@@ -16,22 +16,23 @@ export default {
   props: ['service'],
   methods: {
     getServiceName (service) {
-      if (service == null) {
-        return ''
-      }
-      if (service.service_name == null) {
+      if (service == null || service.service_name == null) {
         return ''
       }
       return service.service_name
     },
     getServiceDescription (service) {
-      if (service == null) {
-        return ''
-      }
-      if (service.about_us == null) {
-        return ''
+      if (service == null || service.about_us == null || service.about_us === '') {
+        return 'Leider existiert keine Beschreibung für diesen Service. Wenn Sie das stört, dann schreiben Sie bitte ' +
+          'keine Email an uns.'
       }
       return service.about_us
+    },
+    getPictureURL (service) {
+      if (service == null || service.picture == null || service.picture === '') {
+        return 'https://cdn.discordapp.com/attachments/960888966226268240/981121537715355658/Logo_4.png'
+      }
+      return service.picture
     }
   }
 }
