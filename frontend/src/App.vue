@@ -50,38 +50,16 @@ export default {
     }
   },
   async mounted () {
-    // window.onresize = () => {
-    //   this.windowWidth = window.innerWidth
-    // }
-    // fetch('/api/service')
-    //   .then((response) => {
-    //     return response.json()
-    //   })
-    //   .then((data) => {
-    //     this.services = data.msg
-    //   })
-    this.services = [
-      {
-        service_name: 'Kita',
-        url: 'test'
-      },
-      {
-        service_name: 'Finanzamt',
-        about_us: 'Hier kann man seine Steuererklärung machen'
-      },
-      {
-        service_name: 'Finanzamt',
-        about_us: 'Hier kann man seine Steuererklärung machen'
-      },
-      {
-        service_name: 'Finanzamt',
-        about_us: 'Hier kann man seine Steuererklärung machen'
-      },
-      {
-        service_name: 'Finanzamt',
-        about_us: 'Hier kann man seine Steuererklärung machen'
-      }
-    ]
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth
+    }
+    fetch('/api/service')
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.services = data.msg
+      })
   }
 }
 </script>
