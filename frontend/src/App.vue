@@ -46,7 +46,7 @@ export default {
       return (rest > colWidth ? colWidth : rest)
     },
     getColWidth () {
-      return Math.floor(this.windowWidth / 300)
+      return (Math.floor(this.windowWidth / 300) > 3 ? 3 : Math.floor(this.windowWidth / 300))
     }
   },
   async mounted () {
