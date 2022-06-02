@@ -47,7 +47,7 @@ amqp.connect(`amqp://${rabbitMQUsername}:${rabbitMQPassword}@${serverURL}:5672`,
                 let date
                 try{
                     //convert Datestring to JSDate
-                    let momentDate = moment(eventJSON.date,'YYYY-MM-DDTHH:mm-ss')
+                    let momentDate = moment(eventJSON.date,'YYYY-MM-DDTHH:mm:ss')
                     date = momentDate.toDate()
                 }catch (e){
                     //something failed while converting string to date
