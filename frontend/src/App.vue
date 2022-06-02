@@ -46,20 +46,42 @@ export default {
       return (rest > colWidth ? colWidth : rest)
     },
     getColWidth () {
-      return Math.floor(this.windowWidth / 300)
+      return (Math.floor(this.windowWidth / 300) > 3 ? 3 : Math.floor(this.windowWidth / 300))
     }
   },
   async mounted () {
-    window.onresize = () => {
-      this.windowWidth = window.innerWidth
-    }
-    fetch('/api/service')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.services = data.msg
-      })
+    // window.onresize = () => {
+    //   this.windowWidth = window.innerWidth
+    // }
+    // fetch('/api/service')
+    //   .then((response) => {
+    //     return response.json()
+    //   })
+    //   .then((data) => {
+    //     this.services = data.msg
+    //   })
+    this.services = [
+      {
+        service_name: 'Kita',
+        url: 'test'
+      },
+      {
+        service_name: 'Finanzamt',
+        about_us: 'Hier kann man seine Steuererklärung machen'
+      },
+      {
+        service_name: 'Finanzamt',
+        about_us: 'Hier kann man seine Steuererklärung machen'
+      },
+      {
+        service_name: 'Finanzamt',
+        about_us: 'Hier kann man seine Steuererklärung machen'
+      },
+      {
+        service_name: 'Finanzamt',
+        about_us: 'Hier kann man seine Steuererklärung machen'
+      }
+    ]
   }
 }
 </script>

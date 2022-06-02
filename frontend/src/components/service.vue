@@ -1,13 +1,13 @@
 <template>
-  <a :href="service.url">
-    <div class="flex-item">
+  <div class="flex-item">
+    <a :href="service.url" >
       <h2 class="title">{{getServiceName(service)}}</h2>
+      <img :src="getPictureURL(service)" alt="">
       <p class="description">
         {{getServiceDescription(service)}}
       </p>
-      <img :src="getPictureURL(service)" alt="">
-    </div>
-  </a>
+    </a>
+  </div>
 </template>
 
 <script>
@@ -23,8 +23,7 @@ export default {
     },
     getServiceDescription (service) {
       if (service == null || service.about_us == null || service.about_us === '') {
-        return 'Leider existiert keine Beschreibung für diesen Service. Wenn Sie das stört, dann schreiben Sie bitte ' +
-          'keine Email an uns.'
+        return 'Leider existiert keine Beschreibung für diesen Service.'
       }
       return service.about_us
     },
@@ -42,21 +41,26 @@ export default {
 
 .title {
   background-color: #05ff97;
-  color:inherit;
   padding: 10px;
 }
 
 .description {
-  background-color: white;
-  padding: 10px;
+  background-color: #05ff97;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .flex-item {
-  height: 300px;
-  width: 250px;
-  /*background-color: #05ff97;*/
-  margin: 0 10px 20px 0;
+  /*height: 300px;*/
+  max-width: 500px;
+  margin: 0 20px 10px 20px;
   overflow: hidden;
+  border: 1px solid #05ff97;
+}
+
+p, h2 {
+  margin:0
 }
 
 a {
@@ -66,6 +70,7 @@ a {
 
 img {
   width: 100%;
+  align-content: center;
 }
 
 </style>
