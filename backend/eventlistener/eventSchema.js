@@ -71,9 +71,9 @@ const deleteSchema = {
  *         "event_id" : 1002,
  *         "event_name": "Delete My Service",
  *         "service_name": "Test",
- *         "date": "1999-06-10T11:11-11",
+ *         "date": "1999-06-10T11:11:11",
  *         "about_us": "Dies ist ein erneuter Test",
- *         "picture": "Irgendwo wo man ein Bild hochladen kann"
+ *         "picture": "Irgendwo wo man ein Bild hochladen kann",
  *         "url": "geiler Link zu unserer Website!"
  * }
  *
@@ -81,10 +81,10 @@ const deleteSchema = {
  *         "event_id" : 1002,
  *         "event_name": "Updated About US",
  *         "service_name": "Test",
- *         "date": "1999-06-10T11:11-11",
+ *         "date": "1999-06-10T11:11:11",
  *         "about_us": "Dies ist ein erneuter Test",
- *         "picture": "Irgendwo wo man ein Bild hochladen kann"
- *         "url": "geiler Link zu unserer Website!"
+ *         "picture": "Irgendwo wo man ein Bild hochladen kann",
+ *         "url": "geiler Link zu unserer neuen Website!"
  * }
  * */
 
