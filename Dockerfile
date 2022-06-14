@@ -1,25 +1,45 @@
-FROM node:lts-alpine
+# Landingpage uses Node and Vue
+# node:alpine is a slim Node installed linux vm
+FROM node:16-alpine
 
-# install simple http server for serving static content
-RUN npm install -g http-server
+# Create an application directories
+RUN mkdir -p /app/frontend
+RUN mkdir -p /app/backend
 
-# make the 'app' folder the current working directory
-WORKDIR /app
+# changes working directory to /app/frontend
+WORKDIR /app/frontend
 
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
+# Copy the frontend package and package-lock.json file
+COPY frontend/package*.json ./
 
-# install project dependencies
+# Install node packages
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
+#  Copies frontend folder in frontend folder of the vm
+COPY frontend/ .
 
-# build app for production with minification
+# Build the app
 RUN npm run build
+
+# changes working directory to /app/backend
+WORKDIR /app/backend
+
+# Copy the backend package and package-lock.json file
+COPY backend/package*.json ./
+COPY backend/prisma/schema.prisma ./prisma/
+
+# Install node packages
+RUN npm install
+
+RUN npx prisma generate
+
+RUN npm install
+
+# Copy or project directory (locally) in the current directory of our docker image (/app)
+COPY backend/ .
 
 # planned port
 EXPOSE 9800
 
-# runs server
-CMD [ "http-server", "dist" ]
+# starts server
+CMD ["npm", "run", "start"]
