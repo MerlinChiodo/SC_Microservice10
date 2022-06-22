@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     login () {
-      const redirectURL = 'http://localhost:8081/'
+      const redirectURL = 'http://supersmartcity.de/'
       location.href = `http://auth.smartcityproject.net:8080/external?redirect_success=${redirectURL}&redirect_error=${redirectURL}`
     },
     logout () {
