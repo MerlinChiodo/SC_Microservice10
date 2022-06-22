@@ -1,13 +1,13 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
+import { RouterLink, RouterView } from 'vue-router'</script>
 
 <template>
   <header class="header">
     <div class="container space-between">
         <h1><RouterLink to="/">SmartCity</RouterLink></h1>
       <div class="login">
-        <button>Zum Login</button>
+        <button v-if="!loggedIn" @click="login">Zum Login</button>
+        <button v-else @click="logout">Ausloggen</button>
       </div>
     </div>
   </header>
@@ -17,6 +17,27 @@ import { RouterLink, RouterView } from 'vue-router'
     <h2><RouterLink to="/data_protection">Datenschutzerklärung</RouterLink></h2>
   </footer>
 </template>
+
+<script>
+export default {
+  methods: {
+    login () {
+      const redirectURL = 'http://localhost:8081/'
+      location.href = `http://auth.smartcityproject.net:8080/external?redirect_success=${redirectURL}&redirect_error=${redirectURL}`
+    },
+    logout () {
+      this.$cookies.set('user_session_token', '')
+      location.reload()
+    }
+  },
+  computed: {
+    loggedIn () {
+      const value = this.$cookies.get('user_session_token')
+      return value !== '' && value != null
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -63,10 +84,6 @@ body {
 .container {
   display: flex;
   margin-right: 30px;
-}
-
-.container.space-around {
-  justify-content: space-around;
 }
 
 .container.space-between {
