@@ -1,68 +1,22 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
 <template>
   <header class="header">
     <div class="container space-between">
-      <h1>SmartCity</h1>
+        <h1><RouterLink to="/">SmartCity</RouterLink></h1>
       <div class="login">
         <button>Zum Login</button>
       </div>
     </div>
   </header>
-  <div>
-    <ul class="container space-around"
-        v-for="index in getColNumber()"
-        :key="index"
-    >
-      <service-component
-        v-for="service in getRowNumbers(index)"
-        :key="(index - 1) * getColWidth() + (service - 1)"
-        :service="services[(service - 1) + getColWidth() * (index - 1)]"
-      />
-    </ul>
-  </div>
+  <RouterView />
+  <footer class="footer">
+    <h2><RouterLink to="/imprint">Impressum</RouterLink></h2>
+    <h2><RouterLink to="/data_protection">Datenschutzerklärung</RouterLink></h2>
+  </footer>
 </template>
-
-<script>
-import ServiceComponent from '@/components/service'
-
-export default {
-  components: { ServiceComponent },
-  data () {
-    return {
-      services: [],
-      windowWidth: window.innerWidth
-    }
-  },
-  methods: {
-    getColNumber () {
-      const colWidth = this.getColWidth()
-      const num = (this.services.length / colWidth) + 1
-      return parseInt(num.toString())
-    },
-    getRowNumbers (colNumber) {
-      const colWidth = this.getColWidth()
-      const serviceAmount = this.services.length
-      const doneServices = (colNumber - 1) * colWidth
-      const rest = serviceAmount - doneServices
-      return (rest > colWidth ? colWidth : rest)
-    },
-    getColWidth () {
-      return (Math.floor(this.windowWidth / 300) > 3 ? 3 : Math.floor(this.windowWidth / 300))
-    }
-  },
-  async mounted () {
-    window.onresize = () => {
-      this.windowWidth = window.innerWidth
-    }
-    fetch('/api/service')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.services = data.msg
-      })
-  }
-}
-</script>
 
 <style>
 #app {
@@ -95,6 +49,15 @@ body {
   margin-top: 0;
   margin-bottom: 50px;
   padding: 10px 0 10px 30px;
+}
+
+.footer {
+  background-color: #05ff97;
+  color: inherit;
+  margin-top: 0;
+  padding: 1px 0 1px 30px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .container {
