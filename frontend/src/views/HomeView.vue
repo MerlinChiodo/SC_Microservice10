@@ -51,6 +51,21 @@ export default {
       })
       .then((data) => {
         this.services = data.msg
+
+        for (const i in this.services) {
+          if (this.services[i] == null || this.services[i].picture == null || this.services[i].picture === '') {
+            this.services[i].picture = 'https://raw.githubusercontent.com/SmartCityProjectGroup/SmartCity/main/Logo_4.png'
+          }
+          fetch(this.services[i].picture)
+            .then(response => {
+              if (response.status === 404) {
+                this.services[i].picture = 'https://raw.githubusercontent.com/SmartCityProjectGroup/SmartCity/main/Logo_4.png'
+              }
+            })
+            .catch(() => {
+              this.services[i].picture = 'https://raw.githubusercontent.com/SmartCityProjectGroup/SmartCity/main/Logo_4.png'
+            })
+        }
       })
   }
 }
