@@ -2,7 +2,7 @@
   <div class="flex-item">
     <a :href="service.url" >
       <h2 class="title">{{getServiceName(service)}}</h2>
-      <img :src="getPictureURL(service)" alt="">
+      <img :src="service.picture" alt="">
       <p class="description">
         {{getServiceDescription(service)}}
       </p>
@@ -26,12 +26,6 @@ export default {
         return 'Leider existiert keine Beschreibung für diesen Service.'
       }
       return service.about_us
-    },
-    getPictureURL (service) {
-      if (service == null || service.picture == null || service.picture === '') {
-        return 'https://cdn.discordapp.com/attachments/960888966226268240/981121537715355658/Logo_4.png'
-      }
-      return service.picture
     }
   }
 }
@@ -49,11 +43,14 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
+  /*margin: 0;*/
 }
 
 .flex-item {
-  /*height: 300px;*/
-  max-width: 500px;
+  max-width: 405px;
+  min-width: 405px;
+  min-height: 250px;
+  /*justify-items: end;*/
   margin: 0 20px 10px 20px;
   overflow: hidden;
   border: 1px solid #05ff97;
@@ -71,6 +68,7 @@ a {
 img {
   width: 100%;
   align-content: center;
+  height: 250px;
 }
 
 </style>
