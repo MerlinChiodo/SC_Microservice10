@@ -20,6 +20,11 @@ import { RouterLink, RouterView } from 'vue-router'</script>
 
 <script>
 export default {
+  data () {
+    return {
+      loggedIn: false
+    }
+  },
   methods: {
     login () {
       const redirectURL = 'http://localhost:8081/'
@@ -30,11 +35,14 @@ export default {
       location.reload()
     }
   },
-  computed: {
-    loggedIn () {
-      const value = this.$cookies.get('user_session_token')
-      return value !== '' && value != null
-    }
+  async mounted () {
+    const token = this.$cookies.get('user_session_token')
+    const response = await fetch('http://auth.smartcityproject.net:8080/verify', {
+      method: 'POST',
+      body: encodeURIComponent('code') + '=' + encodeURIComponent(token),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    this.loggedIn = response.status !== 404
   }
 }
 </script>
