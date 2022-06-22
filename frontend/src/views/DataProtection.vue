@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper">
+    <strong>Diese Website ist ein studentisches Projekt der FH Bielefeld im Rahmen des Moduls Softwareprojekt des Informatikstudiengangs am Campus Minden.</strong><br>
+    <strong>Diese Website ist nicht für einen echten Einsatz gedacht. Keine Daten sind echt, sondern Musterdaten, um die Funktionalität zu testen und zu präsentieren.</strong><br><br>
     <h1>Datenschutzerklärung</h1>
     <h2 id="m14">Einleitung</h2>
     <p>Mit der folgenden Datenschutzerklärung möchten wir Sie darüber aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als "Daten“ bezeichnet) wir zu welchen Zwecken und in welchem Umfang verarbeiten. Die Datenschutzerklärung gilt für alle von uns durchgeführten Verarbeitungen personenbezogener Daten, sowohl im Rahmen der Erbringung unserer Leistungen als auch insbesondere auf unseren Webseiten, in mobilen Applikationen sowie innerhalb externer Onlinepräsenzen, wie z.B. unserer Social-Media-Profile (nachfolgend zusammenfassend bezeichnet als "Onlineangebot“).</p>
@@ -41,7 +43,7 @@
 
 <script>
 export default {
-  name: "DataProtection"
+  name: 'DataProtection'
 }
 </script>
 
@@ -51,6 +53,6 @@ export default {
   }
 
   .wrapper {
-    padding: 10px 10px 10px 40px;
+    padding: 10px 10px 10px 30px;
   }
 </style>
