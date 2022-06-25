@@ -45,7 +45,7 @@ export default {
     window.onresize = () => {
       this.windowWidth = window.innerWidth
     }
-    fetch('http://www.supersmartcity.de/api/service')
+    fetch('/api/service')
       .then((response) => {
         return response.json()
       })
