@@ -1,6 +1,6 @@
 <template>
   <div class="flex-item">
-    <a :href="service.url" >
+    <a :href="getServiceURL(service)" >
       <h2 class="title">{{getServiceName(service)}}</h2>
       <img :src="service.picture" alt="">
       <p class="description">
@@ -15,6 +15,14 @@ export default {
   name: 'service-component',
   props: ['service'],
   methods: {
+    getServiceURL (service) {
+      const token = this.$cookies.get('user_session_token')
+      if (token == null || token === '') {
+        return service.url
+      } else {
+        return `${service.url}?token=${token}`
+      }
+    },
     getServiceName (service) {
       if (service == null || service.service_name == null) {
         return ''
