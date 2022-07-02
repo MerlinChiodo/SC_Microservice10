@@ -28,7 +28,7 @@ export default {
   methods: {
     login () {
       const redirectURL = 'http://supersmartcity.de/'
-      location.href = `http://auth.smartcityproject.net:8080/external?redirect_success=${redirectURL}&redirect_error=${redirectURL}`
+      location.href = `http://supersmartcity.de:9760/external?redirect_success=${redirectURL}&redirect_error=${redirectURL}`
     },
     logout () {
       this.$cookies.set('user_session_token', '')
@@ -37,12 +37,12 @@ export default {
   },
   async mounted () {
     const token = this.$cookies.get('user_session_token')
-    const response = await fetch('http://auth.smartcityproject.net:8080/verify', {
+    const response = await fetch('http://supersmartcity.de:9760/verify', {
       method: 'POST',
       body: encodeURIComponent('code') + '=' + encodeURIComponent(token),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-    this.loggedIn = response.status !== 404
+    this.loggedIn = response.status === 200
   }
 }
 </script>
